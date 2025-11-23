@@ -42,9 +42,7 @@ export async function POST(req: NextRequest) {
     );
   } catch (err) {
     console.error('[generate-character] error', err);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    const message = err instanceof Error ? err.message : 'Internal server error';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
